@@ -4,7 +4,7 @@ import org.junit.Test;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class WordTest {
+public class  WordTest {
 
     @Test
     public void isAnagramShouldReturnTrue() {
@@ -28,7 +28,7 @@ public class WordTest {
         Set<String> words = new TreeSet<>();
         words.add("arc");
 
-        Assert.assertEquals(words, word.findAnagrams());
+        Assert.assertEquals(words, word.getAnagrams());
     }
 
     @Test
@@ -36,7 +36,7 @@ public class WordTest {
         Word word = new Word("caw");
         Set<String> words = new TreeSet<>();
 
-        Assert.assertEquals(words, word.findAnagrams());
+        Assert.assertEquals(words, word.getAnagrams());
     }
 
 }

@@ -4,28 +4,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Dictionary {
-    private final Set<String> words = new TreeSet<>();
+    private Set<String> words = new TreeSet<>();
 
-    public Dictionary(String filePath) {
-        buildDictionary(filePath);
+    public Dictionary(Set<String> dictionaryWords) {
+        this.words = dictionaryWords;
     }
 
-    private void buildDictionary(String filePath) {
-        try {
-            BufferedReader dictionary = new BufferedReader(new FileReader(filePath));
-
-            String word;
-
-            while ((word = dictionary.readLine()) != null) {
-                words.add(word);
-            }
-            dictionary.close();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean isWord(String word) {
+    public boolean isInDictionary(String word) {
         return words.contains(word);
     }
 }

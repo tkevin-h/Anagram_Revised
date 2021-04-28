@@ -1,48 +1,46 @@
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Word {
-    private String word;
-    private Dictionary dictionary;
+    private final String word;
+    private final Set<String> wordCombinations;
 
     public Word(String word) {
         this.word = word;
-        this.dictionary = new Dictionary("./resources/dictionary.txt");
+        String sortedWord = sortWord(word);
+        this.wordCombinations = findWordCombinations(word);
+    }
+
+    public Set<String> getAnagrams() {
+        return wordCombinations;
     }
 
     public boolean isAnagram(String wordToCompare) {
         return sortWord(word).equals(sortWord(wordToCompare));
     }
 
-    public Set<String> findAnagrams() {
+    private Set<String> findWordCombinations(String wordCombination) {
         Set<String> combinations = new TreeSet<>();
 
-        return combinations;
-    }
-
-    private Set<String> findCombinations(String wordCombination) {
-        Set<String> combinations = new TreeSet<>();
-
-        if(word.length() == 1){
+        if(wordCombination.length() == 1){
             combinations.add(word);
         }
         else {
             //Take each letter and combine with all other letters
-            for(int i = 0; i < word.length(); i++) {
-                String removeLetter = word.substring(0, i);
-                String newWord = word.substring(i + 1);
+            for(int i = 0; i < wordCombination.length(); i++) {
+                String removeLetter = wordCombination.substring(0, i);
+                String newWord = wordCombination.substring(i + 1);
                 String remaining  = removeLetter+newWord;
 
                 //Recursive
-                for(String permutation : findCombinations(remaining)) {
-                    String wordCombo = word.charAt(i) + permutation;
+                for(String permutation : findWordCombinations(remaining)) {
+                    String wordCombo = wordCombination.charAt(i) + permutation;
 
                     //why is this still adding words that have less characters than the original word?
-                    if (wordCombo.length() == word.length()) {
-                        combinations.add(word.charAt(i) + permutation);
-                        System.out.println(word.charAt(i) + permutation);
+                    if (wordCombo.length() == wordCombination.length()) {
+                        combinations.add(wordCombination.charAt(i) + permutation);
+                        System.out.println(wordCombination.charAt(i) + permutation);
                     }
                 }
             }
