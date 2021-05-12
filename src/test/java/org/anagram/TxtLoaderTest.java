@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 import static org.junit.Assert.assertEquals;
 
-public class FileLoaderTest {
+public class TxtLoaderTest {
     public final Set<String> words = new TreeSet<>();
 
     @Test
@@ -17,8 +17,8 @@ public class FileLoaderTest {
         words.add("house");
         words.add("plant");
 
-        FileLoader fileLoader = new FileLoader("src/test/resources/TestDictionary.txt");
+        TxtLoader txtLoader = new TxtLoader("src/test/resources/TestDictionary.txt");
 
-        assertEquals(words, fileLoader.load());
+        assertEquals(words, txtLoader.load());
     }
 }

@@ -1,7 +1,6 @@
 package org.anagram;
 
 import java.util.Set;
-import java.util.TreeSet;
 
 public class Dictionary {
     private final Set<String> words;

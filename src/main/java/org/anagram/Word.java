@@ -26,7 +26,7 @@ public class Word {
         Set<String> combinations = new TreeSet<>();
 
         if(wordCombination.length() == 1){
-            combinations.add(word);
+            combinations.add(wordCombination);
         }
         else {
             //Take each letter and combine with all other letters
@@ -39,11 +39,7 @@ public class Word {
                 for(String permutation : findWordCombinations(remaining)) {
                     String wordCombo = wordCombination.charAt(i) + permutation;
 
-                    //why is this still adding words that have less characters than the original word?
-                    if (wordCombo.length() == wordCombination.length()) {
-                        combinations.add(wordCombination.charAt(i) + permutation);
-                        System.out.println(wordCombination.charAt(i) + permutation);
-                    }
+                    combinations.add(wordCombination.charAt(i) + permutation);
                 }
             }
         }

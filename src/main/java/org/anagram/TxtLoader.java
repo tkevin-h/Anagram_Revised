@@ -5,11 +5,11 @@ import java.io.FileReader;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class FileLoader implements Loader {
+public class TxtLoader implements Loader {
 
     private final String _filePath;
 
-    public FileLoader(String filePath)
+    public TxtLoader(String filePath)
     {
         _filePath = filePath;
     }
