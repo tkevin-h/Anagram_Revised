@@ -1,3 +1,6 @@
+package org.anagram;
+
+import org.anagram.Word;
 import org.junit.Assert;
 import org.junit.Test;
 

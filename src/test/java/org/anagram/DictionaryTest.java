@@ -1,16 +1,16 @@
+package org.anagram;
+
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 
-import java.io.IOException;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class DictionaryTest {
-    public Set<String> words = new TreeSet<>();
+    public final Set<String> words = new TreeSet<>();
 
     @Test
-    public void isWordShouldReturnTrue() throws IOException {
+    public void isWordShouldReturnTrue(){
         words.add("car");
         Dictionary dictionary = new Dictionary(words);
         String word = "car";
@@ -19,7 +19,7 @@ public class DictionaryTest {
     }
 
     @Test
-    public void isWordShouldReturnFalse() throws IOException {
+    public void isWordShouldReturnFalse(){
         words.add("cab");
         Dictionary dictionary = new Dictionary(words);
         String word = "abc";

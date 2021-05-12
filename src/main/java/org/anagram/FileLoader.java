@@ -1,14 +1,24 @@
+package org.anagram;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class FileLoader {
-    private final Set<String> words = new TreeSet<>();
+public class FileLoader implements Loader {
 
-    public Set<String> loadTextFile(String filePath) {
+    private final String _filePath;
+
+    public FileLoader(String filePath)
+    {
+        _filePath = filePath;
+    }
+
+    @Override
+    public Set<String> load() {
+        Set<String> words = new TreeSet<>();
         try {
-            BufferedReader dictionary = new BufferedReader(new FileReader(filePath));
+            BufferedReader dictionary = new BufferedReader(new FileReader(_filePath));
 
             String word;
 

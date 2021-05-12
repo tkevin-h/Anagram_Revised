@@ -1,15 +1,24 @@
-import java.io.File;
-import java.util.Locale;
+package org.anagram;
+
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
+        Loader fileLoader = new FileLoader("src/main/resources/dictionary.txt");
+
+        Main m = new Main();
+        m.run(fileLoader);
+
+    }
+
+    public void run(Loader loader) {
         Scanner input = new Scanner(System.in);
         String userWordOne;
         String userWordTwo;
         String optionSelect;
-        FileLoader fileLoader = new FileLoader();
-        Dictionary dictionary = new Dictionary(fileLoader.loadTextFile("src/main/resources/dictionary.txt"));
+
+        Dictionary dictionary = new Dictionary(loader.load());
 
         System.out.println("Enter a word");
         userWordOne = input.nextLine().toLowerCase();

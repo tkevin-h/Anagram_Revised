@@ -1,10 +1,10 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
+package org.anagram;
+
 import java.util.Set;
 import java.util.TreeSet;
 
 public class Dictionary {
-    private Set<String> words = new TreeSet<>();
+    private final Set<String> words;
 
     public Dictionary(Set<String> dictionaryWords) {
         this.words = dictionaryWords;
