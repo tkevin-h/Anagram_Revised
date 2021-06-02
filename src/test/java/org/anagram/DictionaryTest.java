@@ -8,11 +8,15 @@ import java.util.TreeSet;
 
 public class DictionaryTest {
     public final Set<String> words = new TreeSet<>();
+    public final Set<String> dictionaryWords = new TreeSet<>();
 
     @Test
     public void isWordShouldReturnTrue(){
         words.add("car");
-        Dictionary dictionary = new Dictionary(words);
+        dictionaryWords.add("car");
+        dictionaryWords.add("rac");
+
+        Dictionary dictionary = new Dictionary(words, dictionaryWords);
         String word = "car";
 
         Assert.assertTrue(dictionary.isInDictionary(word));
@@ -21,10 +25,12 @@ public class DictionaryTest {
     @Test
     public void isWordShouldReturnFalse(){
         words.add("cab");
-        Dictionary dictionary = new Dictionary(words);
+        dictionaryWords.add("car");
+        dictionaryWords.add("rac");
+
+        Dictionary dictionary = new Dictionary(words, dictionaryWords);
         String word = "abc";
 
         Assert.assertFalse(dictionary.isInDictionary(word));
     }
-
 }

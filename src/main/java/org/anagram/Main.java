@@ -1,87 +1,29 @@
 package org.anagram;
 
-import java.util.Scanner;
-import java.util.Set;
+import java.util.List;
 
 public class Main {
+    Loader textLoader = new TxtLoader("src/main/resources/dictionary.txt");
+    InputOutput inputCLI = new InputOutputCLI();
+
     public static void main(String[] args) {
-        Main m = new Main();
-        Loader fileLoader = new TxtLoader("src/main/resources/dictionary.txt");
-        Scanner input = new Scanner(System.in);
-
-        String userWordOne;
-        String userWordTwo;
-        String optionSelect;
-        String anagramResult;
-        Set<String> allAnagramsResult;
-
-        System.out.println("Enter a word");
-        userWordOne = input.nextLine().toLowerCase();
-
-        System.out.println("1. Check if " + userWordOne + " is an Anagram of another word");
-        System.out.println("2. Find all anagrams of " + userWordOne);
-        optionSelect = input.nextLine().toLowerCase();
-
-        switch (optionSelect) {
-            case "1":
-                System.out.println("Enter another word");
-                userWordTwo = input.nextLine().toLowerCase();
-                anagramResult = m.runAnagramCheck(userWordOne, userWordTwo);
-                System.out.println(anagramResult);
-            case "2":
-                allAnagramsResult = m.runGetAllAnagrams(userWordOne, fileLoader.load());
-                System.out.println(allAnagramsResult);
-            default:
-                System.out.println("Invalid selection");
-        }
+        Main anagrams = new Main();
+        anagrams.run(anagrams.textLoader, anagrams.inputCLI);
     }
 
-    public String runAnagramCheck(String wordOne, String wordTwo) {
-        Word word = new Word(wordOne);
+    public void run(Loader data, InputOutput inputOutput) {
+        String option = inputOutput.getOptions();
 
-        if(word.isAnagram(wordTwo)) {
-            return "These words are anagrams";
+        if (option.equals("checkAnagrams")) {
+            List<String> checkAnagramWords = inputOutput.inputForIsAnagram();
+            Anagram anagram = new Anagram(checkAnagramWords.get(0), data.load());
+            inputOutput.outputForIsAnagram(anagram.isAnagram(checkAnagramWords.get(1)));
         }
 
-        return "These words are not anagrams";
-    }
-
-    public Set<String> runGetAllAnagrams(String wordOne, Set<String> words) {
-        Word word = new Word(wordOne);
-
-        return word.getAnagrams();
-    }
-
-    /*public void run(Loader loader) {
-        Scanner input = new Scanner(System.in);
-        String userWordOne;
-        String userWordTwo;
-        String optionSelect;
-
-        Dictionary dictionary = new Dictionary(loader.load());
-
-        System.out.println("Enter a word");
-        userWordOne = input.nextLine().toLowerCase();
-
-        Word word = new Word(userWordOne);
-
-        System.out.println("1. Check if " + userWordOne + " is an Anagram of another word");
-        System.out.println("2. Find all anagrams of " + userWordOne);
-        optionSelect = input.nextLine().toLowerCase();
-
-        switch (optionSelect) {
-            case "1":
-                System.out.println("Enter another word");
-                userWordTwo = input.nextLine().toLowerCase();
-                if (word.isAnagram(userWordTwo)) {
-                    System.out.println("These words are anagrams");
-                } else {
-                    System.out.println("These words are not anagrams");
-                }
-            case "2":
-                System.out.println(word.getAnagrams());
-            default:
-                System.out.println("Invalid selection");
+        if (option.equals("findAnagrams")) {
+            String findAnagramsWord = inputOutput.inputForFindAnagram();
+            Anagram anagram = new Anagram(findAnagramsWord, data.load());
+            inputOutput.outputForFindAnagram(anagram.getAnagrams());
         }
-    }*/
+    }
 }
